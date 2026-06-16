@@ -31,6 +31,38 @@
     }
 
     html { scroll-behavior: smooth; }
+
+    /* ─── COMPASS ANIMATIONS ─── */
+    @keyframes needle-sway {
+      0%   { transform: rotate(-8deg); }
+      25%  { transform: rotate(5deg); }
+      50%  { transform: rotate(-3deg); }
+      75%  { transform: rotate(6deg); }
+      100% { transform: rotate(-8deg); }
+    }
+    @keyframes ring-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.28; }
+    }
+    .compass-needle {
+      transform-origin: 120px 120px;
+      animation: needle-sway 6s ease-in-out infinite;
+    }
+    .compass-needle-s {
+      transform-origin: 120px 120px;
+      animation: needle-sway 6s ease-in-out infinite;
+    }
+    .compass-ring-outer {
+      transform-origin: 120px 120px;
+      animation: ring-spin 40s linear infinite;
+    }
+    .compass-glow {
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
     body {
       font-family: 'Hanken Grotesk', sans-serif;
       background: var(--paper);
@@ -696,39 +728,37 @@
       <div class="compass-panel">
         <!-- Rosa de los vientos inline SVG -->
         <div class="compass-label">Rumbo fijo</div>
-        <svg viewBox="0 0 240 240" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-          <!-- Degree ring -->
-          <circle cx="120" cy="120" r="106" fill="none" stroke="#566472" stroke-width="1"
-            stroke-dasharray="1.4 6.85"/>
-          <!-- Concentric rings -->
+        <svg viewBox="0 0 240 240" width="210" height="210" xmlns="http://www.w3.org/2000/svg">
+          <!-- Glow -->
+          <circle class="compass-glow" cx="120" cy="120" r="90" fill="rgba(192,97,58,0.15)"/>
+          <!-- Rotating outer degree ring -->
+          <g class="compass-ring-outer">
+            <circle cx="120" cy="120" r="106" fill="none" stroke="#566472" stroke-width="1"
+              stroke-dasharray="1.4 6.85"/>
+          </g>
+          <!-- Static concentric rings -->
           <circle cx="120" cy="120" r="88" fill="none" stroke="#3A474F" stroke-width="1"/>
           <circle cx="120" cy="120" r="56" fill="none" stroke="#3A474F" stroke-width="0.8"/>
           <circle cx="120" cy="120" r="28" fill="none" stroke="#465460" stroke-width="0.8"/>
           <!-- Inter-cardinal rays (slate) -->
-          <line x1="120" y1="14" x2="120" y2="226" stroke="#566472" stroke-width="0.8" transform="rotate(45 120 120)"/>
-          <line x1="120" y1="14" x2="120" y2="226" stroke="#566472" stroke-width="0.8" transform="rotate(135 120 120)"/>
-          <!-- Cardinal rays bicolor: N (top) -->
-          <line x1="120" y1="14" x2="120" y2="120" stroke="#C0613A" stroke-width="2"/>
-          <line x1="120" y1="120" x2="120" y2="226" stroke="#F4EDE1" stroke-width="2"/>
-          <!-- Cardinal rays bicolor: E/W -->
-          <line x1="14" y1="120" x2="120" y2="120" stroke="#F4EDE1" stroke-width="2"/>
-          <line x1="120" y1="120" x2="226" y2="120" stroke="#C0613A" stroke-width="2"/>
-          <!-- Cardinal letters -->
-          <text x="120" y="10" text-anchor="middle" font-family="Space Mono,monospace"
-            font-size="10" fill="#AEB9C2" letter-spacing="2">N</text>
-          <text x="235" y="124" text-anchor="middle" font-family="Space Mono,monospace"
-            font-size="10" fill="#AEB9C2" letter-spacing="2">E</text>
-          <text x="120" y="237" text-anchor="middle" font-family="Space Mono,monospace"
-            font-size="10" fill="#AEB9C2" letter-spacing="2">S</text>
-          <text x="5" y="124" text-anchor="middle" font-family="Space Mono,monospace"
-            font-size="10" fill="#AEB9C2" letter-spacing="2">O</text>
-          <!-- Needle rhombus N (terra) -->
-          <polygon points="120,28 126,120 120,168 114,120" fill="#C0613A" opacity="0.95"/>
-          <!-- Needle rhombus S (cream) -->
-          <polygon points="120,212 126,120 120,72 114,120" fill="#E3D3BC" opacity="0.85"/>
-          <!-- Center -->
-          <circle cx="120" cy="120" r="8" fill="#27333C" stroke="#465460" stroke-width="1.5"/>
-          <circle cx="120" cy="120" r="3.5" fill="#E08A5B"/>
+          <line x1="120" y1="14" x2="120" y2="226" stroke="#3A474F" stroke-width="0.8" transform="rotate(45 120 120)"/>
+          <line x1="120" y1="14" x2="120" y2="226" stroke="#3A474F" stroke-width="0.8" transform="rotate(135 120 120)"/>
+          <!-- Cardinal cross -->
+          <line x1="120" y1="14" x2="120" y2="226" stroke="#3A474F" stroke-width="0.8"/>
+          <line x1="14" y1="120" x2="226" y2="120" stroke="#3A474F" stroke-width="0.8"/>
+          <!-- Cardinal letters (static) -->
+          <text x="120" y="10" text-anchor="middle" font-family="Space Mono,monospace" font-size="10" fill="#AEB9C2" letter-spacing="2">N</text>
+          <text x="235" y="124" text-anchor="middle" font-family="Space Mono,monospace" font-size="10" fill="#AEB9C2" letter-spacing="2">E</text>
+          <text x="120" y="237" text-anchor="middle" font-family="Space Mono,monospace" font-size="10" fill="#AEB9C2" letter-spacing="2">S</text>
+          <text x="5" y="124" text-anchor="middle" font-family="Space Mono,monospace" font-size="10" fill="#AEB9C2" letter-spacing="2">O</text>
+          <!-- Animated needle -->
+          <g class="compass-needle">
+            <polygon points="120,32 125.5,120 120,162 114.5,120" fill="#C0613A" opacity="0.95"/>
+            <polygon points="120,208 125.5,120 120,78 114.5,120" fill="#CBD3DA" opacity="0.7"/>
+          </g>
+          <!-- Center cap -->
+          <circle cx="120" cy="120" r="9" fill="#27333C" stroke="#566472" stroke-width="1.5"/>
+          <circle cx="120" cy="120" r="4" fill="#E08A5B"/>
         </svg>
         <div class="compass-coords">19°25′N · 99°08′O</div>
       </div>
@@ -740,8 +770,8 @@
     <div class="como-inner">
       <div class="como-header">
         <div class="eyebrow light">Cómo trabajamos</div>
-        <h2 class="como-h2">Operamos como parte<br>de tu equipo.<br><em>Diseñamos y nos metemos<br>a implementar.</em></h2>
-        <p class="como-body">Somos estrategas, doers e implementadores. Diseñamos el plan, tomamos el timón contigo y no soltamos el rumbo hasta que el proyecto navega solo.</p>
+        <h2 class="como-h2">Operamos como parte<br>de tu equipo.<br><em>Diseñamos e<br>implementamos.</em></h2>
+        <p class="como-body">Somos estrategas, doers e implementadores. Diseñamos el plan y nos metemos a ejecutarlo contigo — hasta que los resultados son reales.</p>
       </div>
       <div class="como-grid">
         <div class="como-item">
@@ -756,8 +786,8 @@
         </div>
         <div class="como-item">
           <div class="como-num">03</div>
-          <div class="como-title">A buen puerto</div>
-          <p class="como-text">No soltamos el timón a mitad del camino. Nos quedamos hasta que el proyecto navega solo y los resultados son reales.</p>
+          <div class="como-title">Resultados reales</div>
+          <p class="como-text">No entregamos un documento y desaparecemos. Nos quedamos hasta que el proyecto funciona solo y los números lo confirman.</p>
         </div>
       </div>
     </div>
@@ -955,8 +985,8 @@
         <div class="timeline-step-eyebrow">
           <div class="eyebrow terra">Diagnóstico</div>
         </div>
-        <h3 class="timeline-step-title">Leemos el viento</h3>
-        <p class="timeline-step-desc">Antes de trazar cualquier rumbo, entendemos el contexto. Analizamos el mercado, la competencia, los datos disponibles y el estado real del negocio. Sin supuestos, sin atajos.</p>
+        <h3 class="timeline-step-title">Entendemos el contexto</h3>
+        <p class="timeline-step-desc">Antes de proponer cualquier cosa, entendemos el terreno. Analizamos el mercado, la competencia, los datos disponibles y el estado real del negocio. Sin supuestos, sin atajos.</p>
       </div>
 
       <div class="timeline-step">
@@ -966,8 +996,8 @@
         <div class="timeline-step-eyebrow">
           <div class="eyebrow terra">Estrategia</div>
         </div>
-        <h3 class="timeline-step-title">Trazamos el rumbo</h3>
-        <p class="timeline-step-desc">Con los datos sobre la mesa, diseñamos el plan. Definimos prioridades, métricas de éxito, canales, recursos y cronograma. Un plan que se puede ejecutar, no solo presentar.</p>
+        <h3 class="timeline-step-title">Diseñamos el plan</h3>
+        <p class="timeline-step-desc">Con los datos sobre la mesa, definimos prioridades, métricas de éxito, canales, recursos y cronograma. Un plan que se puede ejecutar, no solo presentar.</p>
       </div>
 
       <div class="timeline-step">
@@ -977,9 +1007,9 @@
         <div class="timeline-step-eyebrow">
           <div class="eyebrow terra">Implementación</div>
         </div>
-        <h3 class="timeline-step-title"><em>Tomamos el timón</em></h3>
+        <h3 class="timeline-step-title"><em>Nos metemos a implementar</em></h3>
         <div class="timeline-step-badge">✦ Aquí nos diferenciamos</div>
-        <p class="timeline-step-desc">Ejecutamos el plan nosotros mismos, dentro de tu equipo. No entregamos un documento y nos vamos — nos quedamos a hacer que las cosas sucedan, iterando en el camino.</p>
+        <p class="timeline-step-desc">Ejecutamos el plan nosotros mismos, dentro de tu equipo. No entregamos un documento y desaparecemos — nos quedamos a hacer que las cosas sucedan, iterando en el camino.</p>
       </div>
 
       <div class="timeline-step">
@@ -994,8 +1024,8 @@
         <div class="timeline-step-eyebrow">
           <div class="eyebrow terra">Resultados</div>
         </div>
-        <h3 class="timeline-step-title">Llegamos a buen puerto</h3>
-        <p class="timeline-step-desc">Medimos, reportamos y cerramos el ciclo. Te entregamos el aprendizaje y las palancas para que el proyecto siga navegando solo, o seguimos juntos hacia el siguiente horizonte.</p>
+        <h3 class="timeline-step-title">Entregamos resultados</h3>
+        <p class="timeline-step-desc">Medimos, reportamos y cerramos el ciclo. Te dejamos el aprendizaje y las palancas para que el proyecto siga funcionando solo — o seguimos juntos en el siguiente reto.</p>
       </div>
     </div>
   </section>
