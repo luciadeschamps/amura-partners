@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80" viewBox="0 0 300 80" fill="none" role="img" aria-label="Amura Partners">
+  <circle cx="28" cy="40" r="22" stroke="#211C16" stroke-width="2.6"></circle>
+  <path d="M28 22 L33.5 40 L28 58 L22.5 40 Z" fill="#C0613A"></path>
+  <circle cx="28" cy="40" r="2.9" fill="#211C16"></circle>
+  <text x="64" y="52" font-family="Spectral, Georgia, serif" font-weight="500" font-size="44" letter-spacing="-0.5" fill="#211C16">amura</text>
+  <text x="207" y="52" font-family="&#39;Space Mono&#39;, monospace" font-weight="400" font-size="11" letter-spacing="3.2" fill="#9A8C78">PARTNERS</text>
+</svg>

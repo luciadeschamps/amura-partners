@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amura Partners — Growth · Marketing · Venture Building</title>
+  <link rel="icon" href="assets/amura-favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #211C16;
+      --terra:     #C0613A;
+      --terra-h:   #A04E2C;
+      --marino:    #2E3A44;
+      --copper:    #E08A5B;
+      --sand:      #E3D3BC;
+      --paper:     #F4EDE1;
+      --body-txt:  #4A4136;
+      --mute:      #9A8C78;
+      --border:    #DCC7AE;
+      --marino-bd: #465460;
+      --marino-tx: #CBD3DA;
+      --marino-tx2:#AEB9C2;
+      --row-hover: #EFE6D6;
+      --container: 1240px;
+      --pad-h:     32px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Hanken Grotesk', sans-serif;
+      background: var(--paper);
+      color: var(--body-txt);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILS ─── */
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad-h); }
+    .eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mute);
+    }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 30px; height: 1px; background: #B6A893; flex-shrink: 0;
+    }
+    .eyebrow.terra { color: var(--terra); }
+    .eyebrow.terra::before { background: var(--terra); }
+    .eyebrow.light { color: var(--marino-tx2); }
+    .eyebrow.light::before { background: #566472; }
+
+    .chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--sand); color: #5A4F40;
+      padding: 6px 13px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .chip.dark { background: var(--ink); color: var(--copper); }
+
+    .btn {
+      display: inline-flex; align-items: center;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 14.5px; font-weight: 600;
+      padding: 11px 18px; border-radius: 4px;
+      border: none; cursor: pointer;
+      text-decoration: none; transition: background .2s, color .2s;
+    }
+    .btn-primary { background: var(--terra); color: var(--paper); }
+    .btn-primary:hover { background: var(--terra-h); }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+    .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+    .btn-dark { background: var(--ink); color: var(--paper); }
+    .btn-dark:hover { background: #2E2720; }
+    .btn-copper { background: var(--copper); color: var(--ink); }
+    .btn-copper:hover { background: #C87A4A; }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--pad-h);
+    }
+    .navbar-inner {
+      max-width: var(--container); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+    .logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .logo-name {
+      font-family: 'Spectral', serif; font-size: 22px; font-weight: 500;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .logo-sub {
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: 0.28em; color: var(--mute); text-transform: uppercase;
+      margin-top: 1px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-link {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 14.5px; font-weight: 500;
+      color: #4A4136; text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-link:hover { color: var(--ink); }
+    .nav-cta { margin-left: 10px; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--ink); border-radius: 2px; transition: .25s;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 96px var(--pad-h) 88px;
+    }
+    .hero-inner {
+      max-width: var(--container); margin: 0 auto;
+      display: grid; grid-template-columns: 1.25fr 1fr; gap: 64px; align-items: center;
+    }
+    .hero-content { display: flex; flex-direction: column; gap: 28px; }
+    .hero-h1 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(46px, 5.6vw, 82px); line-height: 1.0;
+      letter-spacing: -0.015em; color: var(--ink);
+    }
+    .hero-h1 em { font-style: italic; color: var(--terra); }
+    .hero-body { font-size: 19px; color: var(--body-txt); line-height: 1.55; max-width: 460px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Compass panel */
+    .compass-panel {
+      background: linear-gradient(158deg, #34424E, #27333C);
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 26px 64px -26px rgba(33,28,22,0.55);
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      position: relative; overflow: hidden;
+    }
+    .compass-panel::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(192,97,58,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .compass-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: #A9B4BC;
+    }
+    .compass-coords {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.16em;
+      color: var(--marino-tx2);
+    }
+
+    /* ─── COMO SECTION ─── */
+    .como {
+      background: var(--marino); color: var(--paper);
+      padding: 96px var(--pad-h);
+    }
+    .como-inner { max-width: var(--container); margin: 0 auto; }
+    .como-header { margin-bottom: 60px; }
+    .como-h2 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(36px, 4.4vw, 60px); line-height: 1.05;
+      color: var(--paper); margin: 18px 0 20px;
+    }
+    .como-h2 em { font-style: italic; color: var(--copper); }
+    .como-body { font-size: 17px; color: var(--marino-tx); line-height: 1.6; max-width: 560px; }
+    .como-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--marino-bd);
+      border-radius: 4px; overflow: hidden;
+    }
+    .como-item {
+      padding: 34px 30px;
+      border-right: 1px solid var(--marino-bd);
+    }
+    .como-item:last-child { border-right: none; }
+    .como-num {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: 40px; color: var(--copper); line-height: 1; margin-bottom: 16px;
+    }
+    .como-title {
+      font-family: 'Spectral', serif; font-weight: 500;
+      font-size: 21px; color: var(--paper); margin-bottom: 10px;
+    }
+    .como-text { font-size: 14.5px; color: var(--marino-tx2); line-height: 1.6; }
+
+    /* ─── SERVICIOS ─── */
+    .servicios { padding: 100px var(--pad-h); }
+    .servicios-inner { max-width: var(--container); margin: 0 auto; }
+    .servicios-header {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px;
+      margin-bottom: 60px; align-items: start;
+    }
+    .servicios-h2 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(36px, 4.4vw, 54px); line-height: 1.05;
+      color: var(--ink); margin-top: 16px;
+    }
+    .servicios-h2 em { font-style: italic; color: var(--terra); }
+    .servicios-intro { font-size: 17px; color: var(--body-txt); line-height: 1.6; margin-top: 28px; }
+
+    .servicio-row {
+      display: grid; grid-template-columns: 230px 1fr; gap: 48px;
+      padding: 48px 0; border-top: 1px solid var(--border);
+    }
+    .servicio-row:last-child { border-bottom: 1px solid var(--border); }
+    .serv-left { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+    .serv-num {
+      font-family: 'Space Mono', monospace; font-size: 11.5px;
+      letter-spacing: 0.24em; color: var(--mute); text-transform: uppercase;
+    }
+    .serv-name {
+      font-family: 'Spectral', serif; font-weight: 500;
+      font-size: 26px; color: var(--ink); line-height: 1.1;
+    }
+    .serv-right { display: flex; flex-direction: column; gap: 16px; }
+    .serv-phrase {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-style: italic; font-size: 24px; color: var(--terra); line-height: 1.2;
+    }
+    .serv-desc { font-size: 16px; color: var(--body-txt); line-height: 1.6; }
+    .serv-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+    /* ─── CTA BAND ─── */
+    .cta-band { padding: 0 var(--pad-h) 100px; }
+    .cta-band-inner { max-width: var(--container); margin: 0 auto; }
+    .cta-card {
+      background: var(--terra); border-radius: 8px;
+      padding: 72px 56px;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+    }
+    .cta-h2 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(36px, 4.4vw, 56px); line-height: 1.05;
+      color: var(--paper);
+    }
+    .cta-h2 em { font-style: italic; }
+    .cta-body { font-size: 17px; color: rgba(244,237,225,0.8); line-height: 1.6; margin-top: 14px; }
+    .cta-action { display: flex; align-items: center; justify-content: flex-end; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      color: #E3D3BC;
+      padding: 64px var(--pad-h) 32px;
+    }
+    .footer-inner { max-width: var(--container); margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid #3A332A;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 18px; }
+    .footer-tagline { font-size: 14px; color: #8A7E6E; line-height: 1.6; max-width: 200px; }
+    .footer-col h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #6B6054; margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 14px; color: #B5A897; text-decoration: none; transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--paper); }
+    .footer-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 28px;
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      letter-spacing: 0.12em; color: #6B6054;
+    }
+
+    /* ─── PAGE: PROCESO ─── */
+    .proceso-hero {
+      padding: 96px var(--pad-h) 72px;
+    }
+    .proceso-hero-inner {
+      max-width: var(--container); margin: 0 auto;
+      display: grid; grid-template-columns: 1.25fr 1fr; gap: 64px; align-items: start;
+    }
+    .proceso-h1 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(42px, 5vw, 72px); line-height: 1.0;
+      letter-spacing: -0.015em; color: var(--ink);
+      margin: 20px 0 22px;
+    }
+    .proceso-h1 em { font-style: italic; color: var(--terra); }
+    .proceso-intro { font-size: 18px; color: var(--body-txt); line-height: 1.6; }
+    .proceso-panel {
+      background: linear-gradient(158deg, #34424E, #27333C);
+      border-radius: 8px; padding: 40px 36px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .proceso-panel-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: #8A97A2;
+    }
+    .proceso-panel-title {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: 22px; color: var(--paper);
+    }
+    .proceso-panel-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-top: 1px solid #3A474F;
+    }
+    .proceso-panel-num {
+      font-family: 'Spectral', serif; font-style: italic;
+      font-size: 16px; color: var(--copper); width: 20px; text-align: center; flex-shrink: 0;
+    }
+    .proceso-panel-step { font-size: 14px; color: var(--marino-tx); }
+
+    .timeline { padding: 72px var(--pad-h) 100px; }
+    .timeline-inner {
+      max-width: 920px; margin: 0 auto;
+      position: relative;
+    }
+    .timeline-line {
+      position: absolute; left: 19px; top: 0; bottom: 0;
+      width: 1.5px;
+      border-left: 1.5px dashed #C9B79E;
+    }
+    .timeline-step {
+      position: relative; padding-left: 74px; padding-bottom: 56px;
+    }
+    .timeline-step:last-child { padding-bottom: 0; }
+    .timeline-node {
+      position: absolute; left: 0; top: 4px;
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1.5px solid var(--terra);
+      background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-node.filled {
+      background: var(--terra); border-color: var(--terra);
+    }
+    .timeline-node-num {
+      font-family: 'Spectral', serif; font-style: italic;
+      font-size: 18px; color: var(--terra);
+    }
+    .timeline-node.filled .timeline-node-num { color: var(--paper); }
+    .timeline-step-eyebrow { margin-bottom: 10px; }
+    .timeline-step-title {
+      font-family: 'Spectral', serif; font-weight: 400;
+      font-size: 30px; color: var(--ink); line-height: 1.1; margin-bottom: 14px;
+    }
+    .timeline-step-title em { font-style: italic; color: var(--terra); }
+    .timeline-step-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--terra); background: rgba(192,97,58,0.08);
+      padding: 5px 10px; border-radius: 4px; margin-bottom: 14px;
+    }
+    .timeline-step-desc { font-size: 16.5px; color: var(--body-txt); line-height: 1.6; max-width: 560px; }
+
+    /* CTA Marino */
+    .cta-marino {
+      background: var(--marino);
+      padding: 80px var(--pad-h);
+    }
+    .cta-marino-inner {
+      max-width: var(--container); margin: 0 auto;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+    }
+    .cta-marino-h2 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px); line-height: 1.05;
+      color: var(--paper);
+    }
+    .cta-marino-h2 em { font-style: italic; color: var(--copper); }
+    .cta-marino-body { font-size: 16px; color: var(--marino-tx); line-height: 1.6; margin-top: 12px; }
+    .cta-marino-action { display: flex; justify-content: flex-end; }
+
+    /* ─── PAGE: CAREERS ─── */
+    .careers-hero {
+      padding: 96px var(--pad-h) 72px;
+    }
+    .careers-h1 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(42px, 5vw, 72px); line-height: 1.0;
+      letter-spacing: -0.015em; color: var(--ink);
+      margin: 20px 0 22px;
+    }
+    .careers-h1 em { font-style: italic; color: var(--terra); }
+    .careers-intro { font-size: 18px; color: var(--body-txt); line-height: 1.6; max-width: 540px; }
+
+    .why-grid-section { padding: 0 var(--pad-h) 80px; }
+    .why-grid {
+      max-width: var(--container); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    .why-item {
+      border-top: 2px solid var(--terra); padding-top: 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .why-title {
+      font-family: 'Spectral', serif; font-weight: 500;
+      font-size: 20px; color: var(--ink);
+    }
+    .why-text { font-size: 15px; color: var(--body-txt); line-height: 1.6; }
+
+    .positions-section { padding: 0 var(--pad-h) 80px; }
+    .positions-inner { max-width: var(--container); margin: 0 auto; }
+    .positions-head {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr auto;
+      gap: 24px; padding: 0 0 14px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mute);
+    }
+    .position-row {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr auto;
+      gap: 24px; padding: 28px 16px 28px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center; cursor: pointer;
+      transition: padding-left .25s, background .25s;
+      border-radius: 4px;
+    }
+    .position-row:hover { padding-left: 24px; background: var(--row-hover); }
+    .pos-title {
+      font-family: 'Spectral', serif; font-weight: 500;
+      font-size: 23px; color: var(--ink);
+    }
+    .pos-type { font-size: 14px; color: var(--body-txt); }
+    .pos-loc {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 0.08em; color: var(--mute);
+    }
+    .pos-arrow { font-size: 20px; color: var(--terra); }
+
+    .no-position {
+      background: var(--marino); padding: 72px var(--pad-h);
+    }
+    .no-position-inner {
+      max-width: var(--container); margin: 0 auto;
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
+    }
+    .no-pos-h2 {
+      font-family: 'Spectral', serif; font-weight: 300;
+      font-size: clamp(28px, 3.5vw, 44px); line-height: 1.1;
+      color: var(--paper);
+    }
+    .no-pos-h2 em { font-style: italic; color: var(--copper); }
+    .no-pos-body { font-size: 16px; color: var(--marino-tx); line-height: 1.6; margin-top: 12px; }
+    .no-pos-action { display: flex; justify-content: flex-end; }
+
+    /* ─── PAGES ─── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      background: var(--paper); border-top: 1px solid var(--border);
+      padding: 16px var(--pad-h) 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: 16px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu .btn { margin-top: 8px; width: 100%; justify-content: center; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner, .proceso-hero-inner, .cta-card,
+      .cta-marino-inner, .no-position-inner, .cta-marino-inner { grid-template-columns: 1fr; }
+      .servicios-header { grid-template-columns: 1fr; }
+      .servicio-row { grid-template-columns: 1fr; gap: 24px; }
+      .como-grid { grid-template-columns: 1fr; }
+      .como-item { border-right: none; border-bottom: 1px solid var(--marino-bd); }
+      .como-item:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .positions-head { display: none; }
+      .position-row { grid-template-columns: 1fr auto; }
+      .pos-type, .pos-loc { display: none; }
+      .compass-panel { display: none; }
+      .proceso-panel { display: none; }
+      .cta-card { padding: 48px 28px; }
+      .cta-action { justify-content: flex-start; }
+      .cta-marino-action { justify-content: flex-start; }
+      .no-pos-action { justify-content: flex-start; }
+    }
+    @media (max-width: 640px) {
+      :root { --pad-h: 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bar { flex-direction: column; gap: 8px; text-align: center; }
+      .hero-btns { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR (shared)
+══════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="logo" onclick="showPage('home');return false;">
+      <svg class="logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="22" r="20" stroke="#211C16" stroke-width="2.4"/>
+        <polygon points="22,7 27,22 22,37 17,22" fill="#C0613A"/>
+        <circle cx="22" cy="22" r="2.6" fill="#211C16"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">amura</span>
+        <span class="logo-sub">partners</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link" onclick="scrollToSection('servicios');return false;">Servicios</a>
+      <a href="#" class="nav-link" onclick="showPage('proceso');return false;">Cómo navegamos</a>
+      <a href="#" class="nav-link" onclick="showPage('careers');return false;">Posiciones</a>
+      <a href="#" class="btn btn-primary nav-cta" onclick="scrollToSection('contacto');return false;">Pongamos rumbo →</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#" class="nav-link" onclick="scrollToSection('servicios');return false;">Servicios</a>
+    <a href="#" class="nav-link" onclick="showPage('proceso');return false;">Cómo navegamos</a>
+    <a href="#" class="nav-link" onclick="showPage('careers');return false;">Posiciones</a>
+    <a href="#" class="btn btn-primary" onclick="scrollToSection('contacto');return false;">Pongamos rumbo →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="eyebrow">Growth · Marketing · Venture building</div>
+        <h1 class="hero-h1">Ponemos<br>rumbo a<br>tus <em>ideas</em></h1>
+        <p class="hero-body">Damos vida a proyectos y los llevamos a buen puerto. Diseñamos la estrategia y tomamos el <em style="font-style:italic;color:var(--terra)">timón</em> contigo para hacerla realidad.</p>
+        <div class="hero-btns">
+          <a href="#" class="btn btn-primary" onclick="scrollToSection('contacto');return false;">Pongamos rumbo →</a>
+          <a href="#" class="btn btn-secondary" onclick="scrollToSection('servicios');return false;">Ver servicios</a>
+        </div>
+      </div>
+      <div class="compass-panel">
+        <!-- Rosa de los vientos inline SVG -->
+        <div class="compass-label">Rumbo fijo</div>
+        <svg viewBox="0 0 240 240" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Degree ring -->
+          <circle cx="120" cy="120" r="106" fill="none" stroke="#566472" stroke-width="1"
+            stroke-dasharray="1.4 6.85"/>
+          <!-- Concentric rings -->
+          <circle cx="120" cy="120" r="88" fill="none" stroke="#3A474F" stroke-width="1"/>
+          <circle cx="120" cy="120" r="56" fill="none" stroke="#3A474F" stroke-width="0.8"/>
+          <circle cx="120" cy="120" r="28" fill="none" stroke="#465460" stroke-width="0.8"/>
+          <!-- Inter-cardinal rays (slate) -->
+          <line x1="120" y1="14" x2="120" y2="226" stroke="#566472" stroke-width="0.8" transform="rotate(45 120 120)"/>
+          <line x1="120" y1="14" x2="120" y2="226" stroke="#566472" stroke-width="0.8" transform="rotate(135 120 120)"/>
+          <!-- Cardinal rays bicolor: N (top) -->
+          <line x1="120" y1="14" x2="120" y2="120" stroke="#C0613A" stroke-width="2"/>
+          <line x1="120" y1="120" x2="120" y2="226" stroke="#F4EDE1" stroke-width="2"/>
+          <!-- Cardinal rays bicolor: E/W -->
+          <line x1="14" y1="120" x2="120" y2="120" stroke="#F4EDE1" stroke-width="2"/>
+          <line x1="120" y1="120" x2="226" y2="120" stroke="#C0613A" stroke-width="2"/>
+          <!-- Cardinal letters -->
+          <text x="120" y="10" text-anchor="middle" font-family="Space Mono,monospace"
+            font-size="10" fill="#AEB9C2" letter-spacing="2">N</text>
+          <text x="235" y="124" text-anchor="middle" font-family="Space Mono,monospace"
+            font-size="10" fill="#AEB9C2" letter-spacing="2">E</text>
+          <text x="120" y="237" text-anchor="middle" font-family="Space Mono,monospace"
+            font-size="10" fill="#AEB9C2" letter-spacing="2">S</text>
+          <text x="5" y="124" text-anchor="middle" font-family="Space Mono,monospace"
+            font-size="10" fill="#AEB9C2" letter-spacing="2">O</text>
+          <!-- Needle rhombus N (terra) -->
+          <polygon points="120,28 126,120 120,168 114,120" fill="#C0613A" opacity="0.95"/>
+          <!-- Needle rhombus S (cream) -->
+          <polygon points="120,212 126,120 120,72 114,120" fill="#E3D3BC" opacity="0.85"/>
+          <!-- Center -->
+          <circle cx="120" cy="120" r="8" fill="#27333C" stroke="#465460" stroke-width="1.5"/>
+          <circle cx="120" cy="120" r="3.5" fill="#E08A5B"/>
+        </svg>
+        <div class="compass-coords">19°25′N · 99°08′O</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo trabajamos -->
+  <section class="como" id="como">
+    <div class="como-inner">
+      <div class="como-header">
+        <div class="eyebrow light">Cómo trabajamos</div>
+        <h2 class="como-h2">Operamos como parte<br>de tu equipo.<br><em>Diseñamos y nos metemos<br>a implementar.</em></h2>
+        <p class="como-body">Somos estrategas, doers e implementadores. Diseñamos el plan, tomamos el timón contigo y no soltamos el rumbo hasta que el proyecto navega solo.</p>
+      </div>
+      <div class="como-grid">
+        <div class="como-item">
+          <div class="como-num">01</div>
+          <div class="como-title">Diseñamos y ejecutamos</div>
+          <p class="como-text">No nos quedamos en el PowerPoint. La estrategia cobra vida porque somos los mismos que la implementamos.</p>
+        </div>
+        <div class="como-item">
+          <div class="como-num">02</div>
+          <div class="como-title">Dentro de tu equipo</div>
+          <p class="como-text">Nos integramos a tu operación como una extensión del equipo, no como consultores externos que entregan un reporte.</p>
+        </div>
+        <div class="como-item">
+          <div class="como-num">03</div>
+          <div class="como-title">A buen puerto</div>
+          <p class="como-text">No soltamos el timón a mitad del camino. Nos quedamos hasta que el proyecto navega solo y los resultados son reales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="servicios" id="servicios">
+    <div class="servicios-inner">
+      <div class="servicios-header">
+        <div>
+          <div class="eyebrow">Servicios</div>
+          <h2 class="servicios-h2">Tres formas de <em>avanzar</em></h2>
+        </div>
+        <p class="servicios-intro">Cada proyecto es diferente. Por eso ofrecemos tres palancas de crecimiento que pueden activarse juntas o por separado, según lo que tu negocio necesite en este momento.</p>
+      </div>
+
+      <div class="servicio-row">
+        <div class="serv-left">
+          <svg width="34" height="34" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="#C0613A" stroke-width="2"/>
+            <polygon points="22,8 27,22 22,36 17,22" fill="#C0613A"/>
+            <circle cx="22" cy="22" r="2.4" fill="#C0613A"/>
+          </svg>
+          <div class="serv-num">01</div>
+          <div class="serv-name">Marketing<br>y growth</div>
+        </div>
+        <div class="serv-right">
+          <div class="serv-phrase">"Crecemos rápido, con criterio."</div>
+          <p class="serv-desc">Diseñamos y ejecutamos la estrategia de crecimiento desde adentro. Performance, contenido, marca y datos, todos alineados hacia el mismo norte.</p>
+          <div class="serv-chips">
+            <span class="chip">Estrategia de growth</span>
+            <span class="chip">Performance & contenido</span>
+            <span class="chip">Marca y posicionamiento</span>
+            <span class="chip">Analítica y experimentos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-row">
+        <div class="serv-left">
+          <svg width="34" height="34" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="#C0613A" stroke-width="2"/>
+            <polygon points="22,8 27,22 22,36 17,22" fill="#C0613A"/>
+            <circle cx="22" cy="22" r="2.4" fill="#C0613A"/>
+          </svg>
+          <div class="serv-num">02</div>
+          <div class="serv-name">Venture<br>building</div>
+        </div>
+        <div class="serv-right">
+          <div class="serv-phrase">"Construimos compañías desde cero."</div>
+          <p class="serv-desc">Del concepto al primer cliente. Validamos el modelo, construimos el producto, definimos la marca y lo lanzamos al mercado.</p>
+          <div class="serv-chips">
+            <span class="chip">Validación y modelo</span>
+            <span class="chip">Producto y diseño</span>
+            <span class="chip">Marca y narrativa</span>
+            <span class="chip">Lanzamiento 0→1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-row">
+        <div class="serv-left">
+          <svg width="34" height="34" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="#C0613A" stroke-width="2"/>
+            <polygon points="22,8 27,22 22,36 17,22" fill="#C0613A"/>
+            <circle cx="22" cy="22" r="2.4" fill="#C0613A"/>
+          </svg>
+          <div class="serv-num">03</div>
+          <div class="serv-name">Implementación<br>de proyectos</div>
+        </div>
+        <div class="serv-right">
+          <div class="serv-phrase">"Del tintero a la realidad."</div>
+          <p class="serv-desc">Esos proyectos que llevan meses esperando en el tintero, los sacamos adelante. Nos encargamos de hacerlos suceder, de principio a fin.</p>
+          <div class="serv-chips">
+            <span class="chip">Proyectos estancados</span>
+            <span class="chip">Ejecución de punta a punta</span>
+            <span class="chip">Nos hacemos cargo</span>
+            <span class="chip">Lo hacemos realidad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band" id="contacto">
+    <div class="cta-band-inner">
+      <div class="cta-card">
+        <div>
+          <h2 class="cta-h2">¿Listo para<br>poner <em>rumbo</em>?</h2>
+          <p class="cta-body">Cuéntanos tu proyecto. En 30 minutos te decimos cómo podemos ayudarte a hacerlo realidad.</p>
+        </div>
+        <div class="cta-action">
+          <a href="mailto:hola@amurapartners.com" class="btn btn-dark">Agendar una llamada →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" onclick="showPage('home');return false;" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+            <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" stroke="#F4EDE1" stroke-width="2.4"/>
+              <polygon points="22,7 27,22 22,37 17,22" fill="#E08A5B"/>
+              <circle cx="22" cy="22" r="2.6" fill="#F4EDE1"/>
+            </svg>
+            <div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:500;color:#F4EDE1;line-height:1;">amura</div>
+              <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:#6B6054;text-transform:uppercase;margin-top:2px;">partners</div>
+            </div>
+          </a>
+          <p class="footer-tagline">Ponemos rumbo a tus ideas. CDMX, México.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <span class="chip dark">Growth</span>
+            <span class="chip dark">Venture building</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#" onclick="scrollToSection('servicios');return false;">Marketing y growth</a></li>
+            <li><a href="#" onclick="scrollToSection('servicios');return false;">Venture building</a></li>
+            <li><a href="#" onclick="scrollToSection('servicios');return false;">Implementación</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Compañía</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('proceso');return false;">Cómo navegamos</a></li>
+            <li><a href="#" onclick="showPage('careers');return false;">Posiciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:hola@amurapartners.com">hola@amurapartners.com</a></li>
+            <li><a href="#" onclick="scrollToSection('contacto');return false;">Agendar llamada</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>© 2026 Amura Partners</span>
+        <span>Ponemos rumbo a tus ideas ✦</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: PROCESO (Cómo navegamos)
+══════════════════════════════════════════ -->
+<div class="page" id="page-proceso">
+  <section class="proceso-hero">
+    <div class="proceso-hero-inner">
+      <div>
+        <div class="eyebrow">Proceso</div>
+        <h1 class="proceso-h1">Cada proyecto sigue<br>un <em>rumbo</em>.</h1>
+        <p class="proceso-intro">No trabajamos con recetas genéricas. Cada compromiso empieza por entender a fondo el terreno y trazar un rumbo claro antes de poner manos a la obra.</p>
+      </div>
+      <div class="proceso-panel">
+        <div class="proceso-panel-label">Las cuatro etapas</div>
+        <div class="proceso-panel-title">Del diagnóstico al resultado.</div>
+        <div class="proceso-panel-item">
+          <div class="proceso-panel-num">1</div>
+          <div class="proceso-panel-step">Diagnóstico — Leemos el viento</div>
+        </div>
+        <div class="proceso-panel-item">
+          <div class="proceso-panel-num">2</div>
+          <div class="proceso-panel-step">Estrategia — Trazamos el rumbo</div>
+        </div>
+        <div class="proceso-panel-item">
+          <div class="proceso-panel-num" style="color:var(--copper);font-weight:700;">3</div>
+          <div class="proceso-panel-step" style="color:var(--paper);">Implementación — Tomamos el timón</div>
+        </div>
+        <div class="proceso-panel-item">
+          <div class="proceso-panel-num">4</div>
+          <div class="proceso-panel-step">Resultados — Llegamos a buen puerto</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="timeline-inner">
+      <div class="timeline-line"></div>
+
+      <div class="timeline-step">
+        <div class="timeline-node">
+          <span class="timeline-node-num">1</span>
+        </div>
+        <div class="timeline-step-eyebrow">
+          <div class="eyebrow terra">Diagnóstico</div>
+        </div>
+        <h3 class="timeline-step-title">Leemos el viento</h3>
+        <p class="timeline-step-desc">Antes de trazar cualquier rumbo, entendemos el contexto. Analizamos el mercado, la competencia, los datos disponibles y el estado real del negocio. Sin supuestos, sin atajos.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-node">
+          <span class="timeline-node-num">2</span>
+        </div>
+        <div class="timeline-step-eyebrow">
+          <div class="eyebrow terra">Estrategia</div>
+        </div>
+        <h3 class="timeline-step-title">Trazamos el rumbo</h3>
+        <p class="timeline-step-desc">Con los datos sobre la mesa, diseñamos el plan. Definimos prioridades, métricas de éxito, canales, recursos y cronograma. Un plan que se puede ejecutar, no solo presentar.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-node filled">
+          <span class="timeline-node-num">3</span>
+        </div>
+        <div class="timeline-step-eyebrow">
+          <div class="eyebrow terra">Implementación</div>
+        </div>
+        <h3 class="timeline-step-title"><em>Tomamos el timón</em></h3>
+        <div class="timeline-step-badge">✦ Aquí nos diferenciamos</div>
+        <p class="timeline-step-desc">Ejecutamos el plan nosotros mismos, dentro de tu equipo. No entregamos un documento y nos vamos — nos quedamos a hacer que las cosas sucedan, iterando en el camino.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-node">
+          <!-- Brújula isotipo para el último paso -->
+          <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="19" stroke="#C0613A" stroke-width="2.2"/>
+            <polygon points="22,8 26,22 22,36 18,22" fill="#C0613A"/>
+            <circle cx="22" cy="22" r="2.4" fill="#211C16"/>
+          </svg>
+        </div>
+        <div class="timeline-step-eyebrow">
+          <div class="eyebrow terra">Resultados</div>
+        </div>
+        <h3 class="timeline-step-title">Llegamos a buen puerto</h3>
+        <p class="timeline-step-desc">Medimos, reportamos y cerramos el ciclo. Te entregamos el aprendizaje y las palancas para que el proyecto siga navegando solo, o seguimos juntos hacia el siguiente horizonte.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-marino">
+    <div class="cta-marino-inner">
+      <div>
+        <h2 class="cta-marino-h2">¿Listo para trazar<br>tu <em>rumbo</em>?</h2>
+        <p class="cta-marino-body">Empezamos por entender tu proyecto. Sin compromisos, sin presión.</p>
+      </div>
+      <div class="cta-marino-action">
+        <a href="mailto:hola@amurapartners.com" class="btn btn-copper">Agendar una llamada →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer duplicado para proceso -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" onclick="showPage('home');return false;" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+            <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" stroke="#F4EDE1" stroke-width="2.4"/>
+              <polygon points="22,7 27,22 22,37 17,22" fill="#E08A5B"/>
+              <circle cx="22" cy="22" r="2.6" fill="#F4EDE1"/>
+            </svg>
+            <div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:500;color:#F4EDE1;line-height:1;">amura</div>
+              <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:#6B6054;text-transform:uppercase;margin-top:2px;">partners</div>
+            </div>
+          </a>
+          <p class="footer-tagline">Ponemos rumbo a tus ideas. CDMX, México.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('home');scrollToSection('servicios');return false;">Marketing y growth</a></li>
+            <li><a href="#" onclick="showPage('home');scrollToSection('servicios');return false;">Venture building</a></li>
+            <li><a href="#" onclick="showPage('home');scrollToSection('servicios');return false;">Implementación</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Compañía</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('proceso');return false;">Cómo navegamos</a></li>
+            <li><a href="#" onclick="showPage('careers');return false;">Posiciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:hola@amurapartners.com">hola@amurapartners.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>© 2026 Amura Partners</span>
+        <span>Ponemos rumbo a tus ideas ✦</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: CAREERS (Posiciones)
+══════════════════════════════════════════ -->
+<div class="page" id="page-careers">
+  <section class="careers-hero container" style="padding-top:96px;padding-bottom:72px;">
+    <div class="eyebrow">Únete al equipo</div>
+    <h1 class="careers-h1">Construyamos juntos,<br>a <em>buen puerto</em>.</h1>
+    <p class="careers-intro">Buscamos personas que disfruten ejecutar tanto como pensar. Gente que no le tema al timón y que quiera construir cosas que importan.</p>
+  </section>
+
+  <section class="why-grid-section">
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-title">Doers e implementadores</div>
+        <p class="why-text">Aquí las ideas se ejecutan, no se archivan. Si te gusta hacer que las cosas sucedan, eres de los nuestros.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-title">Parte del equipo, de verdad</div>
+        <p class="why-text">Trabajamos dentro de los proyectos, no desde afuera. Eso significa impacto real, responsabilidad real y aprendizaje constante.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-title">Variedad que reta</div>
+        <p class="why-text">De startups a corporativos, de growth a venture building. No hay dos proyectos iguales y eso hace que cada semana sea diferente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="positions-section">
+    <div class="positions-inner">
+      <div class="positions-head">
+        <span>Posición</span>
+        <span>Tipo</span>
+        <span>Ubicación</span>
+        <span></span>
+      </div>
+
+      <div class="position-row" onclick="alert('Próximamente — escríbenos a hola@amurapartners.com')">
+        <div class="pos-title">Growth Strategist</div>
+        <div class="pos-type">Tiempo completo</div>
+        <div class="pos-loc">CDMX / Remoto</div>
+        <div class="pos-arrow">→</div>
+      </div>
+
+      <div class="position-row" onclick="alert('Próximamente — escríbenos a hola@amurapartners.com')">
+        <div class="pos-title">Product Designer</div>
+        <div class="pos-type">Tiempo completo</div>
+        <div class="pos-loc">CDMX / Remoto</div>
+        <div class="pos-arrow">→</div>
+      </div>
+
+      <div class="position-row" onclick="alert('Próximamente — escríbenos a hola@amurapartners.com')">
+        <div class="pos-title">Project Lead — Implementación</div>
+        <div class="pos-type">Tiempo completo</div>
+        <div class="pos-loc">CDMX / Remoto</div>
+        <div class="pos-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="no-position">
+    <div class="no-position-inner">
+      <div>
+        <h2 class="no-pos-h2">¿No ves tu posición<br>pero quieres <em>navegar</em><br>con nosotros?</h2>
+        <p class="no-pos-body">Siempre estamos abiertos a conocer gente con talento. Cuéntanos quién eres y qué puedes aportar.</p>
+      </div>
+      <div class="no-pos-action">
+        <a href="mailto:hola@amurapartners.com?subject=Quiero unirme a Amura" class="btn btn-copper">Escríbenos →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" onclick="showPage('home');return false;" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+            <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" stroke="#F4EDE1" stroke-width="2.4"/>
+              <polygon points="22,7 27,22 22,37 17,22" fill="#E08A5B"/>
+              <circle cx="22" cy="22" r="2.6" fill="#F4EDE1"/>
+            </svg>
+            <div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:500;color:#F4EDE1;line-height:1;">amura</div>
+              <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:#6B6054;text-transform:uppercase;margin-top:2px;">partners</div>
+            </div>
+          </a>
+          <p class="footer-tagline">Ponemos rumbo a tus ideas. CDMX, México.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('home');return false;">Marketing y growth</a></li>
+            <li><a href="#" onclick="showPage('home');return false;">Venture building</a></li>
+            <li><a href="#" onclick="showPage('home');return false;">Implementación</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Compañía</h4>
+          <ul>
+            <li><a href="#" onclick="showPage('proceso');return false;">Cómo navegamos</a></li>
+            <li><a href="#" onclick="showPage('careers');return false;">Posiciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:hola@amurapartners.com">hola@amurapartners.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>© 2026 Amura Partners</span>
+        <span>Ponemos rumbo a tus ideas ✦</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const pages = ['home', 'proceso', 'careers'];
+
+  function showPage(name) {
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // close mobile menu
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  function scrollToSection(id) {
+    // if not on home, go home first then scroll
+    const homeActive = document.getElementById('page-home').classList.contains('active');
+    if (!homeActive) {
+      showPage('home');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
