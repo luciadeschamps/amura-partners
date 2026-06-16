@@ -1324,9 +1324,24 @@
       document.getElementById('page-' + p).classList.toggle('active', p === name);
     });
     window.scrollTo({ top: 0, behavior: 'instant' });
-    // close mobile menu
     document.getElementById('mobile-menu').classList.remove('open');
+    // update URL hash
+    const hash = name === 'home' ? '' : '#' + name;
+    history.pushState(null, '', window.location.pathname + hash);
   }
+
+  // load page from URL hash on first load
+  function loadFromHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'careers-intern') {
+      showPage('careers');
+      showJobDetail();
+    } else if (pages.includes(hash)) {
+      showPage(hash);
+    }
+  }
+  window.addEventListener('popstate', loadFromHash);
+  loadFromHash();
 
   function scrollToSection(id) {
     // if not on home, go home first then scroll
@@ -1355,12 +1370,14 @@
     document.getElementById('careers-list').style.display = 'none';
     document.getElementById('job-detail').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'instant' });
+    history.pushState(null, '', '#careers-intern');
   }
 
   function hideJobDetail() {
     document.getElementById('job-detail').style.display = 'none';
     document.getElementById('careers-list').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'instant' });
+    history.pushState(null, '', '#careers');
   }
 
   function handleFileChange(input) {
