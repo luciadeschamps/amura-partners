@@ -1362,21 +1362,29 @@
 
   // load page from URL hash on first load
   function loadFromHash() {
+    // check query param first (?page=careers-intern)
+    const params = new URLSearchParams(window.location.search);
+    const qpage = params.get('page');
+    if (qpage === 'careers-intern') {
+      showPage('careers');
+      setTimeout(() => showJobDetail(), 80);
+      return;
+    }
+    if (qpage && pages.includes(qpage)) {
+      showPage(qpage);
+      return;
+    }
+    // fallback to hash
     const hash = window.location.hash.replace('#', '');
     if (hash === 'careers-intern') {
       showPage('careers');
-      setTimeout(() => showJobDetail(), 50);
+      setTimeout(() => showJobDetail(), 80);
     } else if (pages.includes(hash)) {
       showPage(hash);
     }
   }
   window.addEventListener('popstate', loadFromHash);
-  // wait for DOM to be fully ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadFromHash);
-  } else {
-    loadFromHash();
-  }
+  window.addEventListener('load', loadFromHash);
 
   function scrollToSection(id) {
     // if not on home, go home first then scroll
